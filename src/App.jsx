@@ -30,8 +30,7 @@ function App() {
   }
 
   const createEntry = (newEducation) => {
-      setEducationList((prevEducationListe) => [...prevEducationListe, newEducation]);
-      console.log(newEducation);
+      setEducationList(newEducation);
   }
 
   return (

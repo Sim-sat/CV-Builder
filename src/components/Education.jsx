@@ -1,13 +1,47 @@
 import { useState } from 'react'
 import '/home/simsat/Javascript/my-first-react-app/src/App.css'
+import { MdDeleteOutline } from "react-icons/md";
+
 
 
 function Education({createEntry}){
 
+    function Entries(entries){
+        const listItems = entries.entries.map(entry =>
+            <div key={entry.school} className='font-bold text-xl m-5 bg-slate-100 p-5 flex '>{entry.school} 
+                <button className='inline self-end ml-auto'>
+                    <MdDeleteOutline onClick={() => deleteEntry(entry.school)}
+                                     className='size-8'/>
+                    </button>
+            </div>
+         ) 
+        return (
+            <div>
+                {listItems}
+            </div>
+        )
+    }
+
+    
     const[degree, setTitle] = useState("");
     const[school, setSchool] = useState("");
     const[start, setFrom] = useState("");
     const[end, setEnd] = useState("");
+    const[showForm, setShowForm] = useState(false);
+    const[list, setList] = useState([]);
+
+    const deleteEntry = (school) => {
+        console.log(school);
+        setList((prev) => {
+            const updatedList = prev.filter((entry) => entry.school != school)
+            createEntry(updatedList);
+            return updatedList;
+        });
+    };
+
+    const handleButton = () => {
+        setShowForm(true);
+    }
 
     function handleTitleChange(e){
         setTitle(e.target.value);
@@ -25,13 +59,19 @@ function Education({createEntry}){
         setEnd(e.target.value);
     }
     const handleSubmit = (e) => {
+        setShowForm(false);
         e.preventDefault();
         const newEducation = {   degree, 
                                 school, 
                                 start, 
                                 end
                             };
-        createEntry(newEducation);
+        setList((prev) =>{ 
+            const updatedList = [...prev, newEducation];
+            createEntry (updatedList);
+            return updatedList;
+
+    });
         setTitle("");
         setSchool("");
         setFrom("");
@@ -42,11 +82,13 @@ function Education({createEntry}){
     };
     
     return (
-        <div className='text-xs content-center bg-white  ml-5 p-5 rounded-2xl mb-5 flex-grow block'  >
-        
-        <details className='cursor-pointer'>
-            <summary className='font-bold text-3xl '>Education</summary>
-            <form>
+        <div className='text-xs content-center bg-white  ml-5 p-5 rounded-2xl mb-5 flex-grow justify-center'  >
+         <details className=''>
+            <summary className='font-bold text-3xl cursor-pointer '>Education</summary>
+            <Entries entries={list}></Entries>
+            {!showForm ? (<div className='flex content-center justify-center'>
+                <button onClick={handleButton} className='border border-grey rounded-xl p-3 text-xl text-center mt-10'>+ Education</button>
+            </div> ) : <form>
                 <label htmlFor="name" className='font-bold text-base'>Title</label><br></br>
                 <input onChange={handleTitleChange} 
                         id="name" 
@@ -69,8 +111,10 @@ function Education({createEntry}){
                         placeholder='City, Country' 
                         className="m-2 rounded-xl w-full bg-slate-100  p-2 text-base" type="date"></input><br></br>
                 <button onClick={handleSubmit} id="addEducation" className='border border-black p-2 w-20 rounded-xl font-bold text-base'>Add</button>
-            </form>
+            </form>}
+
         </details>
+       
     </div>)
 
 }
