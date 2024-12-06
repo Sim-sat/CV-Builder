@@ -1,33 +1,59 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Education from './components/Education.jsx'
+import Personal from './components/Personal.jsx'
+import Practical from './components/Practical.jsx'
+import Resume from './components/Resume.jsx'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const[name, setName] = useState("");
+  const[email, setEmail] = useState("");
+  const[phone, setPhone] = useState("");
+  const[adress, setAdress] = useState("");
+  const[educationList, setEducationList] = useState([]);
+
+ 
+  function handleNameChange(e){
+    setName(e.target.value);
+  }
+
+  function handleEmailChange(e){
+    setEmail(e.target.value);
+  }
+
+  function handlePhoneChange(e){
+    setPhone(e.target.value);
+  }
+
+  function handleAdressChange(e){
+    setAdress(e.target.value);
+  }
+
+  const createEntry = (newEducation) => {
+      setEducationList((prevEducationListe) => [...prevEducationListe, newEducation]);
+      console.log(newEducation);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 className='font-bold text-4xl text-center mb-10 '>Resume Builder</h1>
+      <div className='font-serif flex  justify-center items-center min-h-screen h-screen' >
+  
+          <div id="left side" className='flex w-1/3 flex-col max-w-lg'>
+            <Personal 
+            nameChange={(e) => handleNameChange(e)}
+            emailChange={(e) => handleEmailChange(e)}
+            phoneChange={(e) => handlePhoneChange(e)}
+            adressChange={(e) => handleAdressChange(e)}
+            ></Personal>
+            <Education createEntry={createEntry} ></Education>
+            <Practical></Practical>
+          </div>
+          
+          <Resume name={name} email={email} phone={phone} adress={adress} entries={educationList}></Resume>
+     
+      
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
