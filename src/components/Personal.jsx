@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '/home/simsat/Javascript/my-first-react-app/src/App.css'
+
 
 function Personal({nameChange, emailChange, phoneChange, adressChange, name, email, phone, adress}){
     return (

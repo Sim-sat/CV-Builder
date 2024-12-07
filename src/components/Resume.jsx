@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import '/home/simsat/Javascript/my-first-react-app/src/App.css'
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
