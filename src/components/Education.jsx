@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import '/home/simsat/Javascript/my-first-react-app/src/App.css'
-import { MdDeleteOutline } from "react-icons/md";
 import moment from"moment";
 import { IoMdSchool } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
