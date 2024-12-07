@@ -1,26 +1,15 @@
 import { useState } from 'react'
 import '/home/simsat/Javascript/my-first-react-app/src/App.css'
 import { MdDeleteOutline } from "react-icons/md";
+import moment from"moment";
+import { IoMdSchool } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
+import clsx from 'clsx';
+import { v4 as uuidv4 } from 'uuid';
 
+function Education({createEntry, listItems}){
 
-
-function Education({createEntry}){
-
-    function Entries(entries){
-        const listItems = entries.entries.map(entry =>
-            <div key={entry.school} className='font-bold text-xl m-5 bg-slate-100 p-5 flex '>{entry.school} 
-                <button className='inline self-end ml-auto'>
-                    <MdDeleteOutline onClick={() => deleteEntry(entry.school)}
-                                     className='size-8'/>
-                    </button>
-            </div>
-         ) 
-        return (
-            <div>
-                {listItems}
-            </div>
-        )
-    }
+    console.log(listItems)
 
     
     const[degree, setTitle] = useState("");
@@ -29,15 +18,9 @@ function Education({createEntry}){
     const[end, setEnd] = useState("");
     const[showForm, setShowForm] = useState(false);
     const[list, setList] = useState([]);
+    const[open, setOpen] = useState(false);
 
-    const deleteEntry = (school) => {
-        console.log(school);
-        setList((prev) => {
-            const updatedList = prev.filter((entry) => entry.school != school)
-            createEntry(updatedList);
-            return updatedList;
-        });
-    };
+   
 
     const handleButton = () => {
         setShowForm(true);
@@ -52,16 +35,25 @@ function Education({createEntry}){
     }
 
     function handleFromChange(e){
-        setFrom(e.target.value);
+        const date = moment(e.target.value);
+        setFrom(date.format("MM.YYYY"));
     }
     
     function handleEndChange(e){
-        setEnd(e.target.value);
+        const date = moment(e.target.value);
+        setEnd(date.format("MM.YYYY"));
+    }
+
+    function handleCancel(e){
+
+        e.preventDefault();
+        setShowForm(false);
     }
     const handleSubmit = (e) => {
         setShowForm(false);
         e.preventDefault();
-        const newEducation = {   degree, 
+        const newEducation = {  id:  uuidv4(),
+                                degree, 
                                 school, 
                                 start, 
                                 end
@@ -82,13 +74,24 @@ function Education({createEntry}){
     };
     
     return (
-        <div className='text-xs content-center bg-white  ml-5 p-5 rounded-2xl mb-5 flex-grow justify-center'  >
-         <details className=''>
-            <summary className='font-bold text-3xl cursor-pointer '>Education</summary>
-            <Entries entries={list}></Entries>
-            {!showForm ? (<div className='flex content-center justify-center'>
-                <button onClick={handleButton} className='border border-grey rounded-xl p-3 text-xl text-center mt-10'>+ Education</button>
-            </div> ) : <form>
+        <div className={clsx('text-xs bg-white  ml-5 p-5 rounded-2xl mb-5 grow-0 justify-center')}  >
+            <p onClick={() => setOpen(!open)} className='font-bold text-3xl cursor-pointer flex  flex-row gap-4'> 
+                <IoMdSchool className='self-center'/> 
+                Education 
+                <IoIosArrowDown className={clsx('scale-75 self-center ml-auto transition-transform duration-300', open && "rotate-180")} />
+            </p>
+
+            {open && !showForm && (
+                <div>
+                    
+                    {listItems}
+                    <div className='flex content-center justify-center'>
+                        <button onClick={handleButton} className='border border-grey rounded-xl p-3 text-xl text-center mt-10 hover:bg-slate-100 active:scale-95'>+ Education</button>
+                    </div> 
+                </div>
+            )} 
+            {(showForm && open) &&
+            <form>
                 <label htmlFor="name" className='font-bold text-base'>Title</label><br></br>
                 <input onChange={handleTitleChange} 
                         id="name" 
@@ -110,10 +113,14 @@ function Education({createEntry}){
                         id="end" 
                         placeholder='City, Country' 
                         className="m-2 rounded-xl w-full bg-slate-100  p-2 text-base" type="date"></input><br></br>
-                <button onClick={handleSubmit} id="addEducation" className='border border-black p-2 w-20 rounded-xl font-bold text-base'>Add</button>
+                <div className='flex justify-between mt-2'>
+                    <button onClick={handleCancel} id="addEducation" className='border border-black p-2 w-20 rounded-xl font-bold text-base hover:bg-slate-100 active:scale-95' >Cancel</button>
+                    <button onClick={handleSubmit} id="addEducation" className='border border-black p-2 w-20 rounded-xl font-bold text-base hover:bg-slate-100 active:scale-95'>Add</button>
+
+                </div>
             </form>}
 
-        </details>
+  
        
     </div>)
 
