@@ -1,10 +1,8 @@
-import { useState } from 'react'
+
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import clsx from 'clsx';
-import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 
 function Entries(entries){
 
@@ -44,12 +42,10 @@ function ProfessionalEnrty(entries){
 
 function Resume({name, email, phone, adress, educationEntries, professionalEntries, font, color, layout}){
 
-    
-
     return(
             <>
             {layout === 0 &&
-            <div className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl text-center justify-center" , `font-${font}`)}>
+            <div style={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl text-center justify-center")}>
                 
                 <div style={{backgroundColor: color}} 
                     className=' w-full h-1/6 flex flex-col justify-center items-center'>
@@ -82,7 +78,7 @@ function Resume({name, email, phone, adress, educationEntries, professionalEntri
 
             </div>}
             {layout === 1 &&
-            <div className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex " , `font-${font}`)}>
+            <div tyle={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex " , `font-${font}`)}>
                 
             <div style={{backgroundColor: color}} 
                 className=' w-1/2 flex flex-col justify-start justify-items-start text-center gap-5 items-center h-full'>
@@ -119,7 +115,7 @@ function Resume({name, email, phone, adress, educationEntries, professionalEntri
         </div>
             
             }{layout === 2 &&
-            <div className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex flex-row" , `font-${font}`)}>
+            <div tyle={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex flex-row" , `font-${font}`)}>
                     
                 
                 <div className='flex flex-col  w-3/5 items-start text-center'>

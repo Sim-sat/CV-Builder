@@ -43,7 +43,6 @@ export default function App() {
   }
 
   const createProfessionalEntry = (newProfessional) => {
-    console.log("test");
       setProfessionalList(newProfessional);
   }
 
