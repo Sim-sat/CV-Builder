@@ -126,7 +126,7 @@ function Resume(props){
                     {props.educationEntries.length > 0 &&
                     <div className='' >
                         <div style={{color: props.color}} 
-                            className='font-bold text-3xl bg-slate-100 w-5/6 p-2  mb-5 ' >Education</div>
+                            className='font-bold text-2xl bg-slate-100 w-5/6 p-2  mb-5 ' >Education</div>
                         <div className='ml-5'>
                         <Entries entries={props.educationEntries}></Entries>
                         </div>
@@ -134,22 +134,23 @@ function Resume(props){
                     }
                     {props.professionalEntries.length > 0 &&
                     <div className='' >
-                        <div style={{color: props.color}} className='font-bold text-3xl bg-slate-100 w-5/6  p-2  mb-5 '>Professional Experience</div>
+                        <div style={{color: props.color}} className='font-bold text-2xl bg-slate-100 w-5/6  p-2  mb-5 '>Professional Experience</div>
                         <div className='ml-5'>
                         <ProfessionalEnrty className="" entries={props.professionalEntries}></ProfessionalEnrty>    
                         </div>
                     </div>
                     }
                     </div>
-                <div style={{backgroundColor: props.color}} 
-                    className=' w-1/2 flex flex-col justify-start justify-items-start text-white text-center gap-5 items-center h-full break-words'>
-                    <p className='font-bold text-5xl mt-5'>{props.name}</p> 
-            
-                        <span className='text-2xl flex items-center break-all'>{props.email.length > 0 && <MdEmail className='mr-3'/>} {props.email}</span>
-                        <span className='text-2xl flex items-center'>{props.phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{props.phone}</span>
-                        <span className='text-2xl flex item-center'>{props.adress.length > 0 && <FaLocationDot className='mr-3'/>}{props.adress}</span>
-              
-                    </div>
+                   
+            <div style={{backgroundColor: props.color}} 
+                className=' w-1/2 flex flex-col p-2 justify-start justify-items-start text-center gap-5 font-bold text-white items-center h-full break-words'>
+                <p className=' text-4xl mt-5'>{props.name}</p> 
+        
+                    <span className='text-xl flex items-center break-all'>{props.email.length > 0 && <MdEmail className='mr-3'/>} {props.email}</span>
+                    <span className='text-xl flex items-center'>{props.phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{props.phone}</span>
+                    <span className='text-xl flex item-center'>{props.adress.length > 0 && <FaLocationDot className='mr-3'/>}{props.adress}</span>
+          
+            </div>
                 
             </div>
   

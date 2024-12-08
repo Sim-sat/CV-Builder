@@ -96,19 +96,19 @@ function Customize(props) {
             Aa <br></br> Serif
           </button>
           <button
-            onClick={() => handleFontChange("sans")}
+            onClick={() => handleFontChange("sans-serif")}
             className={clsx(
               " w-16 h-20 font-bold border border-black text-xl rounded-md active:scale-100 hover:scale-105 font-serif",
-              props.font == "sans" && "border-2"
+              props.font == "sans-serif" && "border-2"
             )}
           >
             Aa <br></br> Sans
           </button>
           <button
-            onClick={() => handleFontChange("mono")}
+            onClick={() => handleFontChange("monospace")}
             className={clsx(
               " w-16 h-20 font-bold border border-black text-xl rounded-md active:scale-100 hover:scale-105 font-serif",
-              props.font == "mono" && "border-2"
+              props.font == "monospace" && "border-2"
             )}
           >
             Aa <br></br> Mono
