@@ -7,9 +7,9 @@ import clsx from 'clsx';
 function Entries(entries){
 
     const listItems = entries.entries.map(product =>
-        <div id="product.id" className='flex flex-row text-start  mb-8' >
-            <div className='mr-5' >
-                <p>{product.start} - {product.end} </p>
+        <div id="product.id" className='flex flex-row text-start mb-4 mr-20 max-w-full' >
+            <div className='mr-5 ' >
+                <p className="text-base">{product.start} - {product.end} </p>
             </div>
             <div>
                 <p className='font-bold'>{product.school} </p>
@@ -22,14 +22,14 @@ function Entries(entries){
 
 function ProfessionalEnrty(entries){
     const listItems = entries.entries.map(product =>
-        <div id="product.id" className='flex flex-row text-start mb-8 mr-20 max-w-full' >
-            <div className='mr-5 w-2/3' >
-                <p>{product.from} - {product.end} </p>
-                <p>{product.location}</p>
+        <div id="product.id" className='flex flex-row text-start mb-4 mr-20 max-w-full' >
+            <div className='mr-10' >
+                <p className="text-base">{product.from} - {product.end} </p>
+                <p className="text-base">{product.location}</p>
 
             </div>
             <div className='max-w-full'>
-                <p className='font-bold text-2xl'>{product.companyName} </p>
+                <p className='font-bold text-xl'>{product.companyName} </p>
                 <p>{product.title}</p>
                 <p className='break-words mt-1'>{product.description}</p>
             </div>
@@ -40,73 +40,76 @@ function ProfessionalEnrty(entries){
 }
 
 
-function Resume({name, email, phone, adress, educationEntries, professionalEntries, font, color, layout}){
+function Resume(props){
 
     return(
+            
             <>
-            {layout === 0 &&
-            <div style={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl text-center justify-center")}>
+            {props.layout === 0 &&
+            <div style={{fontFamily: props.font}} id="centerLayout" className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] overflow-scroll flex-shrink w-full drop-shadow-2xl max-w-4xl text-center justify-center")}>
                 
-                <div style={{backgroundColor: color}} 
-                    className=' w-full h-1/6 flex flex-col justify-center items-center'>
-                    <p className='font-bold text-6xl text-white'>{name}</p> 
-                    <div className='flex justify-between space-x-10 mt-4 px-4'>
-                        <span className='font-bold text-2xl text-white ml flex items-center'>{email.length > 0 && <MdEmail className='mr-3'/>} {email}</span>
-                        <span className='font-bold text-2xl text-white flex items-center'>{phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{phone}</span>
-                        <span className='font-bold text-2xl text-white flex item-center'>{adress.length > 0 && <FaLocationDot className='mr-3'/>}{adress}</span>
+                <div style={{backgroundColor: props.color}} 
+                    className=' w-full h-1/6 flex flex-col justify-center items-center break-words'>
+                    <p className='font-bold text-5xl text-white'>{props.name}</p> 
+                    <div className='flex justify-between space-x-10 mt-4 px-4 font-bold text-xl text-white items-center ' >
+                        <span className=' flex items-center break-all'>{props.email.length > 0 && <MdEmail className='mr-3'/>} {props.email}</span>
+                        <span className='flex items-center'>{props.phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{props.phone}</span>
+                        <span className=' flex item-center'>{props.adress.length > 0 && <FaLocationDot className='mr-3'/>}{props.adress}</span>
                     </div>
                 </div>
-                {educationEntries.length > 0 &&
+                <div className="mt-10">
+                {props.educationEntries.length > 0 &&
                 <div className='flex justify-center flex-col' >
-                    <div style={{color: color}} 
-                        className='font-bold text-3xl bg-slate-100 w-5/6 text-center p-2 mt-10 mb-5 self-center'>Education</div>
+                    <div style={{color: props.color}} 
+                        className='font-bold text-3xl bg-slate-100 w-5/6 text-center p-2 mb-5 self-center'>Education</div>
                         <div className='ml-20'>
-                     <Entries entries={educationEntries}></Entries>     
+                     <Entries entries={props.educationEntries}></Entries>     
 
                         </div>
                     
                 </div>
                 }
-                {professionalEntries.length > 0 &&
+                {props.professionalEntries.length > 0 &&
                 <div className='flex justify-center flex-col max-w-full' >
-                    <div style={{color: color}} className='font-bold text-3xl bg-slate-100 w-5/6 text-center p-2 mt-10 mb-5 self-center'>Professional Experience</div>
+                    <div style={{color: props.color}} className='font-bold text-3xl bg-slate-100 w-5/6 text-center p-2 mb-5 self-center'>Professional Experience</div>
                     <div className='ml-20'>
-                    <ProfessionalEnrty entries={professionalEntries}></ProfessionalEnrty>    
+                    <ProfessionalEnrty entries={props.professionalEntries}></ProfessionalEnrty>    
                     </div>
                 </div>
                 }
+                </div>
 
             </div>}
-            {layout === 1 &&
-            <div tyle={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex " , `font-${font}`)}>
+            {props.layout === 1 &&
+            <div style={{fontFamily: props.font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex overflow-scroll")}>
                 
-            <div style={{backgroundColor: color}} 
-                className=' w-1/2 flex flex-col justify-start justify-items-start text-center gap-5 items-center h-full'>
-                <p className='font-bold text-5xl text-white mt-5'>{name}</p> 
+            <div style={{backgroundColor: props.color}} 
+                className=' w-1/2 flex flex-col p-2 justify-start justify-items-start text-center gap-5 font-bold text-white items-center h-full break-words'>
+                <p className=' text-4xl mt-5'>{props.name}</p> 
         
-                    <span className='font-bold text-2xl text-white ml flex items-center'>{email.length > 0 && <MdEmail className='mr-3'/>} {email}</span>
-                    <span className='font-bold text-2xl text-white flex items-center'>{phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{phone}</span>
-                    <span className='font-bold text-2xl text-white flex item-center'>{adress.length > 0 && <FaLocationDot className='mr-3'/>}{adress}</span>
+                    <span className='text-xl flex items-center break-all'>{props.email.length > 0 && <MdEmail className='mr-3'/>} {props.email}</span>
+                    <span className='text-xl flex items-center'>{props.phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{props.phone}</span>
+                    <span className='text-xl flex item-center'>{props.adress.length > 0 && <FaLocationDot className='mr-3'/>}{props.adress}</span>
           
             </div>
-            <div className='flex flex-col  w-2/3 items-start text-center'>
+            <div className='flex flex-col  w-2/3 items-start text-center mt-10'>
 
-                {educationEntries.length > 0 &&
+                {props.educationEntries.length > 0 &&
                 <div className='' >
-                    <div style={{color: color}} 
-                        className='font-bold text-3xl bg-slate-100 w-5/6 p-2 mt-10 mb-5 ' >Education</div>
+                    <div style={{color: props.color}} 
+                        className='font-bold text-2xl bg-slate-100 w-5/6 p-2 mb-5 ' >Education</div>
                     <div className='ml-5'>
-                        <Entries entries={educationEntries}></Entries>
+                        <Entries entries={props.educationEntries}></Entries>
                         </div>
                    
                     
                 </div>
                 }
-                {professionalEntries.length > 0 &&
+                {props.professionalEntries.length > 0 &&
                 <div className='' >
-                    <div style={{color: color}} className='font-bold text-3xl bg-slate-100 w-5/6  p-2 mt-10 mb-5 '>Professional Experience</div>
+                    <div style={{color: props.color}} className='font-bold text-2xl bg-slate-100 w-5/6  p-2  mb-5 '>Professional Experience</div>
                     <div className='ml-5'>
-                        <ProfessionalEnrty className="" entries={professionalEntries}></ProfessionalEnrty>    
+                        <ProfessionalEnrty className="" entries={props.professionalEntries}></ProfessionalEnrty>    
                         </div>
                 </div>
                 }
@@ -114,37 +117,37 @@ function Resume({name, email, phone, adress, educationEntries, professionalEntri
 
         </div>
             
-            }{layout === 2 &&
-            <div tyle={{fontFamily: font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex flex-row" , `font-${font}`)}>
+            }{props.layout === 2 &&
+            <div style={{fontFamily: props.font}} className={clsx("bg-white ml-10 mr-10 h-screen max-h-[80rem] w-full drop-shadow-2xl max-w-4xl flex flex-row overflow-scroll")}>
                     
                 
-                <div className='flex flex-col  w-3/5 items-start text-center'>
+                <div className='flex flex-col  w-2/3 items-start text-center mt-10'>
     
-                    {educationEntries.length > 0 &&
+                    {props.educationEntries.length > 0 &&
                     <div className='' >
-                        <div style={{color: color}} 
-                            className='font-bold text-3xl bg-slate-100 w-5/6 p-2 mt-10 mb-5 ' >Education</div>
+                        <div style={{color: props.color}} 
+                            className='font-bold text-3xl bg-slate-100 w-5/6 p-2  mb-5 ' >Education</div>
                         <div className='ml-5'>
-                        <Entries entries={educationEntries}></Entries>
+                        <Entries entries={props.educationEntries}></Entries>
                         </div>
                     </div>
                     }
-                    {professionalEntries.length > 0 &&
+                    {props.professionalEntries.length > 0 &&
                     <div className='' >
-                        <div style={{color: color}} className='font-bold text-3xl bg-slate-100 w-5/6  p-2 mt-10 mb-5 '>Professional Experience</div>
+                        <div style={{color: props.color}} className='font-bold text-3xl bg-slate-100 w-5/6  p-2  mb-5 '>Professional Experience</div>
                         <div className='ml-5'>
-                        <ProfessionalEnrty className="" entries={professionalEntries}></ProfessionalEnrty>    
+                        <ProfessionalEnrty className="" entries={props.professionalEntries}></ProfessionalEnrty>    
                         </div>
                     </div>
                     }
                     </div>
-                <div style={{backgroundColor: color}} 
-                    className=' w-1/2 flex flex-col justify-start justify-items-start text-center gap-5 items-center h-full'>
-                    <p className='font-bold text-5xl text-white mt-5'>{name}</p> 
+                <div style={{backgroundColor: props.color}} 
+                    className=' w-1/2 flex flex-col justify-start justify-items-start text-white text-center gap-5 items-center h-full break-words'>
+                    <p className='font-bold text-5xl mt-5'>{props.name}</p> 
             
-                        <span className='font-bold text-2xl text-white ml flex items-center'>{email.length > 0 && <MdEmail className='mr-3'/>} {email}</span>
-                        <span className='font-bold text-2xl text-white flex items-center'>{phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{phone}</span>
-                        <span className='font-bold text-2xl text-white flex item-center'>{adress.length > 0 && <FaLocationDot className='mr-3'/>}{adress}</span>
+                        <span className='text-2xl flex items-center break-all'>{props.email.length > 0 && <MdEmail className='mr-3'/>} {props.email}</span>
+                        <span className='text-2xl flex items-center'>{props.phone.length > 0 && <FaPhoneAlt className='mr-3'/>}{props.phone}</span>
+                        <span className='text-2xl flex item-center'>{props.adress.length > 0 && <FaLocationDot className='mr-3'/>}{props.adress}</span>
               
                     </div>
                 
