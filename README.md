@@ -1,8 +1,10 @@
-# React + Vite
+## CV Builder from [The Odin Projekt](https://www.theodinproject.com/dashboard "The Odin Project")
+Features:
+- change font, color and layout
+- add own education and work experience
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## [Live Preview](https://melodic-fairy-01818e.netlify.app/ "Live Preview")
+not adapted for mobile use
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![preview](/src/assets/preview.png)
